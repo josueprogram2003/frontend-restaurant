@@ -1,3 +1,4 @@
+import { RouterModule, RouterOutlet } from '@angular/router';
 import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -11,6 +12,8 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatSidenavModule,
     RestaurantComponent,
     MatTabsModule,
+    RouterOutlet,
+    RouterModule
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',

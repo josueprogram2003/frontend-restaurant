@@ -1,0 +1,29 @@
+<div class="w-full">
+
+  <div class="w-full text-center p-1" style="background-color: #F8D1B6; border: 2px solid black;">
+    <h3 class="m-0" style="margin-bottom: 0px;">Carrito de comidas</h3>
+  </div>
+
+  @for (dish of dishes; track $index) {
+    <div class="flex w-1/2 p-3 mt-5" style="background-color: #bad2d1; border-radius: 5px; border: 2px solid #405b5e;">
+      <div class="w-1/2 h-full">
+        <div class="w-full h-full style" style="height: 200px;">
+          <img src="{{dish.image_url}}" alt="123" style="width: 100%; height: 100%;">
+        </div>
+      </div>
+      <div class="w-1/2 h-full pl-2">
+        <div class="w-full h-full">
+          <h5 class="p-0 m-0">{{dish.name}}</h5>
+          <hr>
+          <h4 class="text-red-600 font-bolder"> S/. {{dish.promotional_price}}</h4>
+          <div>
+            <button mat-button class="p-2" style="background-color: #ffff; border-radius: 5px;" (click)="deleteCard(dish)"><mat-icon style="color: red;">delete</mat-icon></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+  <div class="w-full mt-8 bg-red-400 p-3">
+    <p class="text-red-600 font-bolder text-white m-0 p-0" style="margin: 0px; font-weight: bolder; font-size: 1.5rem;">TOTAL: S/. {{total.toFixed(2)}}</p>
+  </div>
+</div>

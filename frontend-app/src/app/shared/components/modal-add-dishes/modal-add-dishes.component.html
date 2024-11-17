@@ -1,8 +1,8 @@
 <div class="w-full bg-white">
-  @if (data == null) {
-    <h2 mat-dialog-title style="color: black">Agregar Restaurante</h2>
+  @if (isNotObject()) {
+    <h2 mat-dialog-title style="color: black">Agregar Plato</h2>
   }@else {
-    <h2 mat-dialog-title style="color: black">Editar Restaurante</h2>
+    <h2 mat-dialog-title style="color: black">Editar Plato</h2>
   }
   <mat-dialog-content>
     <form class="flex flex-col items-center px-5">
@@ -18,18 +18,12 @@
       </div>
       <div class="w-full flex justify-between">
         <mat-form-field>
-          <mat-label>Rating</mat-label>
-          <input matInput type="number" [(ngModel)]="rating" name="rating" />
+          <mat-label>Precio</mat-label>
+          <input matInput type="number" [(ngModel)]="precio" name="precio" />
         </mat-form-field>
         <mat-form-field>
-          <mat-label>Horario</mat-label>
-          <input matInput type="text" [(ngModel)]="horario" name="horario" />
-        </mat-form-field>
-      </div>
-      <div class="w-full flex justify-between">
-        <mat-form-field class="w-full">
-          <mat-label>Dirección</mat-label>
-          <input matInput type="text" [(ngModel)]="direccion" name="direccion" />
+          <mat-label>Precio promocional</mat-label>
+          <input matInput type="number" [(ngModel)]="precio_promocional" name="precio_promocional" />
         </mat-form-field>
       </div>
       <div class="w-full flex justify-between">
@@ -38,11 +32,23 @@
           <input matInput type="text" [(ngModel)]="descripcion" name="descripcion" />
         </mat-form-field>
       </div>
+      <div class="w-full flex justify-between">
+        <mat-form-field class="w-full">
+          <mat-label>Disponibilidad</mat-label>
+          <input matInput type="text" [(ngModel)]="disponibilidad" name="disponibilidad" />
+        </mat-form-field>
+      </div>
+      <div class="w-full flex justify-between">
+        <mat-form-field class="w-full">
+          <mat-label>Imagen (URL)</mat-label>
+          <input matInput type="text" [(ngModel)]="url" name="url" />
+        </mat-form-field>
+      </div>
     </form>
   </mat-dialog-content>
   <mat-dialog-actions>
     <button mat-button (click)="onNoClick()">Cancel</button>
-    @if (data == null) {
+    @if (isNotObject()) {
       <button mat-button (click)="guardar()">Save</button>
     }@else {
       <button mat-button (click)="editar()">Edit</button>

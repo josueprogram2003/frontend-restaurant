@@ -1,0 +1,55 @@
+<h3 class="text-dark text-center text-lg py-2" style="background-color: #BED6FF;">{{restaurant.name}}</h3>
+@if (user.id == 1) {
+  <button
+  mat-flat-button
+  class="mb-5 w-full p-3 text-white" 
+  style="background-color: #69a299; border-radius: 0px; color: white;"
+  (click)="openBottomSheet()"
+  >
+  Agregar
+  </button>
+}@else {
+  <button
+  mat-flat-button
+  class="mb-5 w-full p-3 text-white" 
+  style="background-color: #69a299; border-radius: 0px; color: white;"
+  routerLink="/modules/cart"
+  >
+  Ir a Carrito de compras
+  </button>
+}
+<div class="flex justify-evenly flex-wrap">
+  @for (item of dishes; track $index) {
+    <div>
+      <mat-card class="example-card" appearance="outlined">
+        <mat-card-header style="display: flex; flex-direction: column-reverse;">
+          <div class="flex justify-between">
+            <mat-card-title>{{item.name}}</mat-card-title>
+            <div class="bg-red-700 text-white p-1">{{item.availability}}</div>
+          </div>
+          <mat-card-subtitle class="text-dark" style="color: black;">{{item.category}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <div style="width: 100%; height: 250px;" class="my-3">
+            <img [src]="item.image_url" class="w-full h-full">
+          </div>
+          <p>
+           {{item.description}}
+          </p>
+          <h4 class="text-dangar" style="color: #F73B50; font-weight: bold; text-decoration-line: line-through;">S/. {{item.price}}</h4>
+          <h4 class="text-dangar" style="color: #F73B50; font-weight: bold;">S/. {{item.promotional_price}}</h4>
+        </mat-card-content>
+        <mat-card-actions>
+         @if (user.id == 1) {
+          <button mat-button style="color: black;" (click)="deleteDish(item)">Eliminar</button>
+          <button mat-button style="color: black;" (click)="updateDishes(item)">Editar</button>
+         }@else{
+          @if (item.status == 0) {
+            <button mat-button style="color: black;" (click)="addCart(item)">Añadir Carrito</button>
+          }
+         }
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  }
+</div>

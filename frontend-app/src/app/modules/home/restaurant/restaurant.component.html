@@ -1,5 +1,6 @@
 <div class="w-full overflow-auto h-full">
-  <button
+  @if (dataURL.id == 1) {
+    <button
     mat-flat-button
     class="my-5 w-full p-3 text-white"
     style="background-color: #69a299"
@@ -7,6 +8,7 @@
   >
     Agregar
   </button>
+  }
   <table
     mat-table
     [dataSource]="dataSource"
@@ -14,42 +16,99 @@
     style="background-color: #bad2d1; color: black"
   >
     <ng-container matColumnDef="position">
-      <th mat-header-cell *matHeaderCellDef style="color: black">No.</th>
-      <td mat-cell *matCellDef="let element" style="color: black">
-        {{ element.position }}
+      <th mat-header-cell *matHeaderCellDef style="color: black">NO.</th>
+      <td mat-cell *matCellDef="let restaurant" style="color: black">
+        {{ restaurant.restaurant_id }}
       </td>
     </ng-container>
 
     <!-- Name Column -->
     <ng-container matColumnDef="nombre">
-      <th mat-header-cell *matHeaderCellDef style="color: black">nombre</th>
-      <td mat-cell *matCellDef="let element" style="color: black">
-        {{ element.nombre }}
+      <th mat-header-cell *matHeaderCellDef style="color: black">NOMBRE</th>
+      <td mat-cell *matCellDef="let restaurant" style="color: black">
+        {{ restaurant.name }}
       </td>
     </ng-container>
 
     <!-- Weight Column -->
     <ng-container matColumnDef="direccion">
-      <th mat-header-cell *matHeaderCellDef style="color: black">direccion</th>
-      <td mat-cell *matCellDef="let element" style="color: black">
-        {{ element.direccion }}
+      <th mat-header-cell *matHeaderCellDef style="color: black">DIRECCIÓN</th>
+      <td mat-cell *matCellDef="let restaurant" style="color: black">
+        {{ restaurant.address }}
       </td>
     </ng-container>
 
     <!-- Symbol Column -->
     <ng-container matColumnDef="horario">
-      <th mat-header-cell *matHeaderCellDef style="color: black">horario</th>
-      <td mat-cell *matCellDef="let element" style="color: black">
-        {{ element.horario }}
+      <th mat-header-cell *matHeaderCellDef style="color: black">HORARIO</th>
+      <td mat-cell *matCellDef="let restaurant" style="color: black">
+        {{ restaurant.schedule }}
       </td>
     </ng-container>
 
     <ng-container matColumnDef="descripcion">
       <th mat-header-cell *matHeaderCellDef style="color: black">
-        descripcion
+        DESCRIPCIÓN
       </th>
-      <td mat-cell *matCellDef="let element" style="color: black">
-        {{ element.descripcion }}
+      <td mat-cell *matCellDef="let restaurant" style="color: black">
+        {{ restaurant.description }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="categoria">
+      <th mat-header-cell *matHeaderCellDef style="color: black">CATEGORIA</th>
+      <td mat-cell *matCellDef="let restaurant" style="color: black">
+        {{ restaurant.category }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="clasificacion">
+      <th mat-header-cell *matHeaderCellDef style="color: black">
+        CLASIFICACION
+      </th>
+      <td mat-cell *matCellDef="let restaurant" style="color: black">
+        {{ restaurant.rating }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="acciones">
+      <th mat-header-cell *matHeaderCellDef style="color: black">ACCIONES</th>
+      <td
+        mat-cell
+        *matCellDef="let restaurant"
+        style="color: black"
+        class="h-full"
+      >
+        <div class="w-full h-full flex items-center justify-center">
+          @if (dataURL.id == 1) {
+            <button
+            class="rounded-lg cursor-pointer mr-2"
+            style="background-color: #f87171"
+            mat-flat-button
+            aria-label="Example icon button with a home icon"
+            (click)="deleteRestaurant(restaurant)"
+          >
+            <mat-icon class="text-white mx-0" style="margin-left: 0px; margin-right: 0px;">delete</mat-icon>
+          </button>
+          <button
+            class="p-1 rounded-lg cursor-pointer flex items-center justify-center mr-2"
+            style="background-color: #60a5fa"
+            mat-flat-button
+            aria-label="Example icon button with a home icon"
+            (click)="updateRestaurant(restaurant)"
+          >
+            <mat-icon class="text-white mx-0" style="margin-left: 0px; margin-right: 0px;">edit</mat-icon>
+          </button>
+          }
+          <button
+            class="p-1 rounded-lg cursor-pointer flex items-center justify-center"
+            style="background-color: #ffd358"
+            mat-flat-button
+            aria-label="Example icon button with a home icon"
+            (click)="openDishes(restaurant)"
+          >
+            <mat-icon class="text-white mx-0" fontIcon="home" style="margin-left: 0px; margin-right: 0px;"></mat-icon>
+          </button>
+        </div>
       </td>
     </ng-container>
 

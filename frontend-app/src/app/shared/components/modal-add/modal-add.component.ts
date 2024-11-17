@@ -1,10 +1,11 @@
-import { Component, inject } from '@angular/core';
-import { MatDialogModule } from '@angular/material/dialog';
+import { Component, inject, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { RestaurantService } from '../../services/restaurant.service';
 @Component({
   selector: 'app-modal-add',
   standalone: true,
@@ -18,10 +19,64 @@ import { MatDialogRef } from '@angular/material/dialog';
   templateUrl: './modal-add.component.html',
   styleUrl: './modal-add.component.scss',
 })
-export class ModalAddComponent {
+export class ModalAddComponent implements OnInit{
   readonly dialogRef = inject(MatDialogRef<ModalAddComponent>);
-  animal: string = '';
+  data = inject(MAT_DIALOG_DATA);
+  service = inject(RestaurantService);
+  id:number= 0
+  nombre: string = '';
+  categoria: string = '';
+  rating: number | null = null;
+  horario: string = '';
+  direccion: string = '';
+  descripcion: string = '';
+  ngOnInit(): void {
+    if (this.data!=null) {
+      this.id = this.data.restaurant_id;
+      this.nombre = this.data.name;
+      this.categoria = this.data.category;
+      this.rating = this.data.rating;
+      this.horario = this.data.schedule;
+      this.direccion = this.data.address;
+      this.descripcion = this.data.description;
+    }
+  }
   onNoClick(): void {
     this.dialogRef.close();
+  }
+
+  guardar(): void {
+    const nuevoRestaurante = {
+      restaurant_id: this.id,
+      name: this.nombre,
+      category: this.categoria,
+      rating: this.rating,
+      schedule: this.horario,
+      address: this.direccion,
+      description: this.descripcion,
+      status:1,
+      image_url: '',
+    };
+    this.service.insertRestaurant(nuevoRestaurante).subscribe((data)=>{
+      console.log(data)
+      this.dialogRef.close(true);
+    })
+  }
+
+  editar(): void {
+    const editRestaurante = {
+      name: this.nombre,
+      category: this.categoria,
+      rating: this.rating,
+      schedule: this.horario,
+      address: this.direccion,
+      description: this.descripcion,
+      status:1,
+      image_url: '',
+    };
+    this.service.putRestaurant(editRestaurante,this.id).subscribe((data)=>{
+      console.log(data)
+      this.dialogRef.close(true);
+    })
   }
 }

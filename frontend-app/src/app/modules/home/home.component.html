@@ -1,18 +1,9 @@
-<div class="fixed w-56 h-full bg-red-500" style="background-color: #69a299">
-  Sidebar
+<div class="px-5 py-5 font-bold" style="background-color: #bad2d1">
+  <div>Restaurant App</div>
+  <div><Button mat-flat-button color="primary" routerLink="/login">Cerrar Sesión</Button></div>
 </div>
-<div class="ml-56 px-5 py-5 font-bold" style="background-color: #bad2d1">
-  Restaurant App
-</div>
-<div class="ml-56 px-8 py-8 container-home" style="background-color: #e8edf1">
+<div class="px-8 py-8 container-home" style="background-color: #e8edf1">
   <div class="h-full w-full bg-white p-6 rounded-xl overflow-auto">
-    <mat-tab-group animationDuration="0ms">
-      <mat-tab label="Restaurant">
-        <div class="w-full h-full">
-          <app-restaurant></app-restaurant>
-        </div>
-      </mat-tab>
-      <mat-tab label="Dishes">Content 2</mat-tab>
-    </mat-tab-group>
+    <router-outlet></router-outlet>
   </div>
 </div>
