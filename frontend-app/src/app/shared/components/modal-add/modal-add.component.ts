@@ -32,13 +32,14 @@ export class ModalAddComponent implements OnInit{
   descripcion: string = '';
   ngOnInit(): void {
     if (this.data!=null) {
-      this.id = this.data.restaurant_id;
-      this.nombre = this.data.name;
-      this.categoria = this.data.category;
-      this.rating = this.data.rating;
-      this.horario = this.data.schedule;
-      this.direccion = this.data.address;
-      this.descripcion = this.data.description;
+      console.log(this.data);
+      this.id = this.data.restaurant.restaurant_id;
+      this.nombre = this.data.restaurant.name;
+      this.categoria = this.data.restaurant.category;
+      this.rating = this.data.restaurant.rating;
+      this.horario = this.data.restaurant.schedule;
+      this.direccion = this.data.restaurant.address;
+      this.descripcion = this.data.restaurant.description;
     }
   }
   onNoClick(): void {

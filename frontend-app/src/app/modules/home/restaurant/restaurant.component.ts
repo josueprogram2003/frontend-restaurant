@@ -79,6 +79,7 @@ export class RestaurantComponent implements OnInit {
   }
 
   updateRestaurant(restaurant: any) {
+    console.log(restaurant);
     const dialogRef = this.dialog.open(ModalAddComponent, {
       data:{restaurant: restaurant, user: this.dataURL},
       width: '50%',
